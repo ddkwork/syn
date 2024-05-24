@@ -19,7 +19,11 @@ type state struct {
 func (r state) match(text []rune) (*regexp2.Match, *rule) {
 	for i, rule := range r.rules {
 		debugf("State.match: for state %s trying rule %d /%s/\n", r.name, i, rule.pattern)
-		res := mylog.Check2(rule.match(text))
+		res, e := rule.match(text)
+		mylog.CheckIgnore(e)
+		if e != nil {
+			return nil, nil
+		}
 		if res != nil {
 			debugf("State.match: rule %d matched\n", i)
 			return res, &r.rules[i]
@@ -116,11 +120,11 @@ func (r rule) IsUseSelf() bool {
 // its subexpressions like regexp.FindSubmatchIndex.
 // Returns nil if there is no match.
 func (r rule) match(text []rune) (*regexp2.Match, error) {
-	m := mylog.Check2(r.pattern.FindRunesMatch(text))
+	m, e := r.pattern.FindRunesMatch(text)
 	if m != nil && m.Index != 0 {
 		return nil, nil
 	}
-	return m, nil
+	return m, e
 }
 
 type byGroupElement struct {
