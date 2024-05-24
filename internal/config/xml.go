@@ -90,9 +90,9 @@ type UsingSelf struct {
 	State string `xml:"state,attr"`
 }
 
-func DecodeLexer(rdr io.Reader) (lex *Lexer, err error) {
+func DecodeLexer(rdr io.Reader) (lex *Lexer, e error) {
 	dec := xml.NewDecoder(rdr)
-	mylog.Check(dec.Decode(&lex))
+	e = dec.Decode(&lex)
 	return
 }
 

@@ -55,12 +55,9 @@ func NewLexerFromXMLFS(fsys fs.FS, xmlLexerConfigFile string) (*Lexer, error) {
 // NewLexerFromXML creates a new lexer given an XML definition of a lexer.
 func NewLexerFromXML(rdr io.Reader) (*Lexer, error) {
 	lexModel := mylog.Check2(config.DecodeLexer(rdr))
-
 	bld := newLexerBuilder(lexModel)
 	lex := mylog.Check2(bld.Build())
-
 	debugf("NewLexerFromXML: lexer rules:\n%s\n", lex.rules)
-
 	return lex, nil
 }
 
