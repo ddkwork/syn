@@ -48,7 +48,6 @@ func NewLexerFromXMLFile(xmlLexerConfigFile string) (*Lexer, error) {
 // using the specified FS.
 func NewLexerFromXMLFS(fsys fs.FS, xmlLexerConfigFile string) (*Lexer, error) {
 	f := mylog.Check2(fsys.Open(xmlLexerConfigFile))
-
 	return NewLexerFromXML(f)
 }
 
