@@ -20,6 +20,7 @@ var GlobalLexerRegistry = func() *syn.LexerRegistry {
 	paths := mylog.Check2(fs.Glob(embedded, "embedded/*.xml"))
 
 	for _, path := range paths {
+		mylog.Trace(path)
 		lex := mylog.Check2(syn.NewLexerFromXMLFS(embedded, path))
 		// TODO: save the errors here and allow retrieving them
 
