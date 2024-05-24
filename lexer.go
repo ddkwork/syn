@@ -22,6 +22,7 @@ import (
 
 	"github.com/ddkwork/golibrary/mylog"
 	"github.com/dlclark/regexp2"
+
 	"github.com/jeffwilliams/syn/internal/config"
 )
 
@@ -113,7 +114,7 @@ func newLexerBuilder(cfg *config.Lexer) lexerBuilder {
 }
 
 func (lb *lexerBuilder) Build() (*Lexer, error) {
-	mylog.Check(lb.validate())
+	mylog.CheckIgnore(lb.validate())
 	mylog.Check(lb.build())
 
 	lb.resolveIncludes()
